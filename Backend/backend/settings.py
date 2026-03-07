@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django.contrib.postgres',
+    'storages',
     'myapp',
     'rest_framework_simplejwt',
     'channels',
@@ -116,21 +117,28 @@ CORS_ALLOWED_ORIGINS = [o for o in [
     os.environ.get('FRONTEND_URL', ''),  # production origin
 ] if o]
 
+# ── AWS S3 (media files) ──────────────────────────────────────────
+AWS_ACCESS_KEY_ID       = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY   = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_S3_BUCKET')
+AWS_S3_REGION_NAME      = os.environ.get('AWS_REGION', 'ap-south-1')
+AWS_S3_CUSTOM_DOMAIN    = f'{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com'
+AWS_S3_FILE_OVERWRITE   = False          # don't overwrite same-name uploads
+AWS_DEFAULT_ACL          = None           # use bucket-level ACL
+AWS_QUERYSTRING_AUTH     = False          # clean public URLs (no ?Signature=...)
+
 # ── Static & Media ────────────────────────────────────────────────
 STATIC_URL  = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'   # where collectstatic puts files
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STORAGES = {
     'default': {
-        'BACKEND': 'django.core.files.storage.FileSystemStorage',
+        'BACKEND': 'storages.backends.s3boto3.S3Boto3Storage',
     },
     'staticfiles': {
         'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
     },
 }
-
-MEDIA_URL  = '/images/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # ── Password Validation ───────────────────────────────────────────
 AUTH_PASSWORD_VALIDATORS = [
