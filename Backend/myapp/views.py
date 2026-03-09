@@ -25,7 +25,7 @@ class VehicleListAPIView(generics.ListAPIView):
         filters.OrderingFilter,
     ]
     filterset_fields = ['brand', 'fuel', 'transmission', 'status']
-    ordering_fields  = ['price', 'year', 'kilometers']
+    ordering_fields  = ['year', 'kilometers']
     ordering         = ['-id']
 
     def get_queryset(self):
@@ -69,7 +69,7 @@ class VehicleAdminViewSet(viewsets.ModelViewSet):
         filters.OrderingFilter,
     ]
     filterset_fields  = ['brand', 'fuel', 'transmission', 'status', 'is_featured']
-    ordering_fields   = ['price', 'year', 'kilometers', 'id']
+    ordering_fields   = ['year', 'kilometers', 'id']
 
     def perform_create(self, serializer):
         vehicle = serializer.save()

@@ -16,7 +16,6 @@ class VehicleSerializer(serializers.ModelSerializer):
             'brand',
             'model',
             'year',
-            'price',
             'kilometers',
             'fuel',
             'transmission',
