@@ -15,13 +15,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-dev-key')
 DEBUG      = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = [h for h in [
-    'localhost',
-    '127.0.0.1',
-    os.environ.get('EC2_PUBLIC_IP', ''),
-    os.environ.get('DOMAIN', ''),
-    'www.' + os.environ.get('DOMAIN', ''),
-] if h and h != 'www.']
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "65.0.134.183"
+]
 
 # ── Apps ──────────────────────────────────────────────────────────
 INSTALLED_APPS = [
@@ -123,6 +121,7 @@ AWS_SECRET_ACCESS_KEY   = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_S3_BUCKET')
 AWS_S3_REGION_NAME      = os.environ.get('AWS_REGION', 'ap-south-1')
 AWS_S3_CUSTOM_DOMAIN    = f'{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com'
+
 AWS_S3_FILE_OVERWRITE   = False          # don't overwrite same-name uploads
 AWS_DEFAULT_ACL          = None           # use bucket-level ACL
 AWS_QUERYSTRING_AUTH     = False          # clean public URLs (no ?Signature=...)
