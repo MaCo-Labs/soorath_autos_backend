@@ -16,9 +16,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-dev-key')
 DEBUG      = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [
-    "127.0.0.1",
+    "65.0.134.183",
+    "65.0.134.183.nip.io",
+    "infidots.com",
+    "www.infidots.com",
     "localhost",
-    "65.0.134.183"
+    "127.0.0.1"
 ]
 
 # ── Apps ──────────────────────────────────────────────────────────
@@ -109,11 +112,11 @@ SIMPLE_JWT = {
 }
 
 # ── CORS ──────────────────────────────────────────────────────
-CORS_ALLOWED_ORIGINS = [o for o in [
-    'http://localhost:5173',        # Vite dev
-    'http://127.0.0.1:5173',
-    os.environ.get('FRONTEND_URL', ''),  # production origin
-] if o]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://prod.d3q88yk7ov76i2.amplifyapp.com",
+]
 
 # ── AWS S3 (media files) ──────────────────────────────────────────
 AWS_ACCESS_KEY_ID       = os.environ.get('AWS_ACCESS_KEY_ID')
@@ -204,3 +207,5 @@ JAZZMIN_UI_TWEAKS = {
         'success':   'btn-success',
     },
 }
+DATA_UPLOAD_MAX_MEMORY_SIZE = 52428800
+FILE_UPLOAD_MAX_MEMORY_SIZE = 52428800

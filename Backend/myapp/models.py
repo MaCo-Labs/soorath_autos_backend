@@ -11,7 +11,7 @@ class Vehicle(models.Model):
     brand        = models.CharField(max_length=200)   # GIN trgm index added via migration
     model        = models.CharField(max_length=200)   # GIN trgm index added via migration
     year         = models.IntegerField()
-    price        = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     kilometers   = models.IntegerField()
     fuel         = models.CharField(max_length=10, choices=FUEL_OPTIONS)
     transmission = models.CharField(max_length=30, choices=TRANSMISSION_OPTIONS)
